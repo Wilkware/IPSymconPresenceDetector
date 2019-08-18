@@ -1,0 +1,13 @@
+{
+  "translations": {
+    "de": {
+      "Motion Variable:": "Bewegungsvariable:",
+      "Brightness Variable:": "Helligkeitsvariable:",
+      "Threshold Value:": "Schwellwert:",
+      "Switch Variable:": "Schaltvariable:",
+      "Script:": "Script:",
+      "Advanced settings:": "Erweiterte Einstellungen:",
+      "State variable is only a simple boolean!": "Statusvariable ist eine boolsche Variable, keine HomeMatic State Variable!"
+    }
+  }
+}

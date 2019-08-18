@@ -1,0 +1,27 @@
+{
+  "elements": [
+    {"type": "SelectVariable", "name": "MotionVariable", "caption": "Motion Variable:" },
+    {"type": "SelectVariable", "name": "BrightnessVariable", "caption": "Brightness Variable:" },
+    {"type": "Select", "name": "ThresholdValue", "caption": "Threshold Value:",
+      "options": [
+        {"label": "Immer", "value": 0 },
+        {"label": "5 lx", "value": 5 },
+        {"label": "10 lx", "value": 10 },
+        {"label": "15 lx", "value": 15 },
+        {"label": "20 lx", "value": 20 },
+        {"label": "25 lx", "value": 25 },
+        {"label": "30 lx", "value": 30 },
+        {"label": "35 lx", "value": 35 },
+        {"label": "40 lx", "value": 40 },
+        {"label": "45 lx", "value": 45 },
+        {"label": "50 lx", "value": 50 },
+        {"label": "75 lx", "value": 75 },
+        {"label": "100 lx", "value": 100 }
+      ]
+    },
+    {"type": "SelectVariable", "name": "SwitchVariable", "caption": "Switch Variable:" },
+    {"type": "SelectScript", "name": "ScriptVariable", "caption": "Script:" },
+    {"type": "Label", "label": "Advanced settings:" },
+    {"type": "CheckBox", "name": "OnlyBool", "caption": "State variable is only a simple boolean!" }
+  ]
+}

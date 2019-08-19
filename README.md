@@ -4,9 +4,12 @@
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![StyleCI](https://github.styleci.io/repos/203022044/shield?style=flat)](https://github.styleci.io/repos/203022044)
 
-# Präsenzmelder
+# Toolmatic Presence Detector (Präsenzmelder)
 
-Schaltet in Abhängikeit von Bewegung und Helligkeit hinterlegte Variable bzw. führt ein Script aus.
+Die **Toolmatic** Bibliothek ist eine kleine Tool-Sammlung im Zusammenhang mit HomeMatic/IP Geräten.  
+Hauptsächlich beinhaltet sie kleine Erweiterung zur Automatisierung von Aktoren oder erleichtert das Steuern von Geäten bzw. bietet mehr Komfort bei der Bedienung.  
+  
+Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine hinterlegte Variable bzw. führt ein Script aus.  
 
 ## Inhaltverzeichnis
 
@@ -32,24 +35,24 @@ Schaltet in Abhängikeit von Bewegung und Helligkeit hinterlegte Variable bzw. f
 
 ### 3. Installation
 
-* Über den Modul Store das Modul 'Presence Detector' installieren.
+* Über den Modul Store das Modul 'Toolmatic Presence Detector' installieren.
 * Alternativ Über das Modul-Control folgende URL hinzufügen.  
 `https://github.com/Wilkware/IPSymconPresenceDetector` oder `git://github.com/Wilkware/IPSymconPresenceDetector.git`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-* Unter "Instanz hinzufügen" ist das 'Präsensmelder'-Modul (Alias: Bewegungsmelder) unter dem Hersteller '(Sonstige)' aufgeführt.
+* Unter "Instanz hinzufügen" ist das 'Präsensmelder'-Modul (Alias: Bewegungsmelder) unter dem Hersteller '(Geräte)' aufgeführt.
 
 __Konfigurationsseite__:
 
-Name               | Beschreibung
------------------- | ---------------------------------
-MotionVariable     | Statusvariable eines Bewegungsmelders (true = Anwesend; false = Abwesend).
-BrightnessVariable | Quellvariable, über welche die Helligkeit abgefragt werden kann, bei HmIP-SMI ist es ILLUMINATION.
-ThresholdValue     | Schwellwert, von 0 bis 100 Lux.
-SwitchVariable     | Zielvariable, die bei hinreichender Bedingung geschalten wird (true). 
-ScriptVariable     | Script(auswahl), welches zum Einsatz kommen soll.
-OnlyBool           | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
+Name                | Beschreibung
+------------------- | ---------------------------------
+Bewegungsvariable   | Statusvariable eines Bewegungsmelders (true = Anwesend; false = Abwesend).
+Helligkeitsvariable | Quellvariable, über welche die Helligkeit abgefragt werden kann, bei HmIP-SMI ist es ILLUMINATION.
+Schwellwert         | Schwellwert, von 0 bis 100 Lux.
+Schaltvariable      | Zielvariable, die bei hinreichender Bedingung geschalten wird (true).
+Skript              | Script(auswahl), welches zum Einsatz kommen soll.
+Statusvariable      | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
 
 ### 5. Statusvariablen und Profile
 

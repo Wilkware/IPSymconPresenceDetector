@@ -35,13 +35,13 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 
 ### 3. Installation
 
-* Über den Modul Store das Modul 'Toolmatic Presence Detector' installieren.
+* Über den Modul Store das Modul *Toolmatic Presence Detector* installieren.
 * Alternativ Über das Modul-Control folgende URL hinzufügen.  
 `https://github.com/Wilkware/IPSymconPresenceDetector` oder `git://github.com/Wilkware/IPSymconPresenceDetector.git`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-* Unter "Instanz hinzufügen" ist das 'Präsensmelder'-Modul (Alias: Bewegungsmelder) unter dem Hersteller '(Geräte)' aufgeführt.
+* Unter 'Instanz hinzufügen' ist das *Präsensmelder*-Modul (Alias: *Bewegungsmelder*) unter dem Hersteller '(Geräte)' aufgeführt.
 
 __Konfigurationsseite__:
 

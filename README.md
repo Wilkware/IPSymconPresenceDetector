@@ -6,10 +6,10 @@
 
 # Toolmatic Presence Detector (Präsenzmelder)
 
-Die **Toolmatic** Bibliothek ist eine kleine Tool-Sammlung im Zusammenhang mit HomeMatic/IP Geräten.  
-Hauptsächlich beinhaltet sie kleine Erweiterung zur Automatisierung von Aktoren oder erleichtert das Steuern von Geäten bzw. bietet mehr Komfort bei der Bedienung.  
+Die *Toolmatic Bibliothek* ist eine kleine Tool-Sammlung im Zusammenhang mit HomeMatic/IP Geräten.  
+Hauptsächlich beinhaltet sie kleine Erweiterung zur Automatisierung von Aktoren oder erleichtert das Steuern von Geräten bzw. bietet mehr Komfort bei der Bedienung.  
   
-Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine hinterlegte Variable bzw. führt ein Script aus.  
+Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine Variable bzw. führt ein Script aus.  
 
 ## Inhaltverzeichnis
 

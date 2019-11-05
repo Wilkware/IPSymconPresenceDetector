@@ -1,10 +1,10 @@
+# Toolmatic Presence Detector (Präsenzmelder)
+
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-[![Product](https://img.shields.io/badge/Symcon%20Version-4.1%20%3E-blue.svg)](https://www.symcon.de/produkt/)
-[![Version](https://img.shields.io/badge/Modul%20Version-1.2.20190818-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
+[![Product](https://img.shields.io/badge/Symcon%20Version-5.0%20%3E-blue.svg)](https://www.symcon.de/produkt/)
+[![Version](https://img.shields.io/badge/Modul%20Version-1.3.20191105-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![StyleCI](https://github.styleci.io/repos/203022044/shield?style=flat)](https://github.styleci.io/repos/203022044)
-
-# Toolmatic Presence Detector (Präsenzmelder)
 
 Die *Toolmatic Bibliothek* ist eine kleine Tool-Sammlung im Zusammenhang mit HomeMatic/IP Geräten.  
 Hauptsächlich beinhaltet sie kleine Erweiterung zur Automatisierung von Aktoren oder erleichtert das Steuern von Geräten bzw. bietet mehr Komfort bei der Bedienung.  
@@ -31,7 +31,7 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 
 ### 2. Voraussetzungen
 
-* IP-Symcon ab Version 4.1
+* IP-Symcon ab Version 5.0
 
 ### 3. Installation
 
@@ -54,6 +54,15 @@ Schaltvariable      | Zielvariable, die bei hinreichender Bedingung geschalten w
 Skript              | Script(auswahl), welches zum Einsatz kommen soll.
 Statusvariable      | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
 
+Einem hinterlegtem Script werden folgende Konfigurationswerte mitgegeben:  
+  
+Parameter           | Beschreibung
+------------------- | ---------------------------------
+MotionVariable      | ID der Bewegungsvariable, Zugriff im Skript via $_IPS['MotionVariable']
+BrightnessVariable  | ID der Helligkeitsvariable, Zugriff im Skript via $_IPS['BrightnessVariable']
+SwitchVariable      | ID der Schaltvariable, Zugriff im Skript via $_IPS['SwitchVariable']
+ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via $_IPS['ThresholdValue']
+
 ### 5. Statusvariablen und Profile
 
 Es werden keine zusätzlichen Profile benötigt.
@@ -75,12 +84,19 @@ Beispiel:
 `void TPD_SetThreshold(int $InstanzID, int wert);`  
 Setzt den Helligkeits-Schwellwert auf den neuen Lux-'wert'.  
 Die Funktion liefert true im Erfolgsfall.  
+_HINWEIS_: Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.
 
 Beispiel:  
 `TPD_SetThreshold(12345, 50);`  
 Setzt den Schwellwert auf 50 Lux.
 
 ### 8. Versionshistorie
+
+v1.3.20191105
+
+* _NEU_: Scriptaufruf auf IPS_RunScriptEX umgestellt (Variablenübergabe)
+* _FIX_: Debugausgabe war fehlerhaft bei hinterlegtem Script
+* _FIX_: Dokumentation überarbeitet
 
 v1.2.20190818
 
@@ -102,7 +118,7 @@ v1.0.20170125
 ## Spenden
 
 Die Software ist für die nicht kommzerielle Nutzung kostenlos, Schenkungen als Unterstützung für den Entwickler bitte hier:  
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166" target="_blank"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif" border="0" /></a>
+[![Donate](https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
 
 ## Lizenz
 

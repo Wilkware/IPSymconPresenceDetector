@@ -35,7 +35,7 @@ class PresenceDetector extends IPSModule
     /**
      * Interne Funktion des SDK.
      * data[0] = neuer Wert
-     * data[1] = wurde Wert ge�ndert?
+     * data[1] = wurde Wert geändert?
      * data[2] = alter Wert
      * data[3] = Timestamp.
      */
@@ -55,7 +55,7 @@ class PresenceDetector extends IPSModule
                 } elseif ($data[0] == false && $data[1] == true) { // OnChange auf FALSE, d.h. keine Bewegung
                     $this->SendDebug('MessageSink', 'OnChange auf FALSE - keine Bewegung');
                 } else { // OnChange auf FALSE, d.h. keine Bewegung
-                    $this->SendDebug('MessageSink', 'OnChange unveraendert - keine Zustandsaenderung');
+                    $this->SendDebug('MessageSink', 'OnChange unverändert - keine Zustandsänderung');
                 }
             break;
         }
@@ -88,18 +88,25 @@ class PresenceDetector extends IPSModule
             } else {
                 //$pid = IPS_GetParent($sv);
                 //$ret = @HM_WriteValueBoolean($pid, 'STATE', true); //Ger�t einschalten
-                $ret = @RequestAction($sv, true); //Ger�t einschalten
+                $ret = @RequestAction($sv, true); //Gerät einschalten
                 if ($ret === false) {
-                    $this->SendDebug('SwitchState', 'Ger�t konnte nicht eingeschalten werden (UNREACH)!');
+                    $this->SendDebug('SwitchState', 'Gerät konnte nicht eingeschalten werden (UNREACH)!');
                 }
             }
             $this->SendDebug('SwitchState', 'Variable (#'.$sv.') auf true geschalten!');
         }
-        // Script ausf�hren
+        // Script ausführen
         if ($this->ReadPropertyInteger('ScriptVariable') != 0) {
             if (IPS_ScriptExists($this->ReadPropertyInteger('ScriptVariable'))) {
-                $sr = IPS_RunScript($this->ReadPropertyInteger('ScriptVariable'));
-                $this->SendDebug('SwitchState', 'Script Return Value: '.$rs);
+                $mID = $this->ReadPropertyInteger('MotionVariable');
+                $bID = $this->ReadPropertyInteger('BrightnessVariable');
+                $sID = $this->ReadPropertyInteger('SwitchVariable');
+                $tVA = $this->ReadPropertyInteger('ThresholdValue');
+                $ret = IPS_RunScriptEx(
+                    $this->ReadPropertyInteger('ScriptVariable'),
+                    array("MotionVariable" => $mID, "BrightnessVariable" => $bID, "SwitchVariable" => $sID, "ThresholdValue" => $tVA)
+                );
+                $this->SendDebug('SwitchState', 'Script Return Value: '.$ret);
             }
         }
     }

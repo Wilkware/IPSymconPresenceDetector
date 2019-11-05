@@ -104,7 +104,7 @@ class PresenceDetector extends IPSModule
                 $tVA = $this->ReadPropertyInteger('ThresholdValue');
                 $ret = IPS_RunScriptEx(
                     $this->ReadPropertyInteger('ScriptVariable'),
-                    array("MotionVariable" => $mID, "BrightnessVariable" => $bID, "SwitchVariable" => $sID, "ThresholdValue" => $tVA)
+                    ['MotionVariable' => $mID, 'BrightnessVariable' => $bID, 'SwitchVariable' => $sID, 'ThresholdValue' => $tVA]
                 );
                 $this->SendDebug('SwitchState', 'Script Return Value: '.$ret);
             }

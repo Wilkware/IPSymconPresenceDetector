@@ -118,7 +118,8 @@ v1.0.20170125
 
 ## Spenden
 
-Die Software ist für die nicht kommzerielle Nutzung kostenlos, Schenkungen als Unterstützung für den Entwickler bitte hier:  
+Die Software ist für die nicht kommzerielle Nutzung kostenlos,  
+Schenkungen als Unterstützung für den Entwickler bitte hier:
 [![License](https://img.shields.io/badge/Einfach%20spenden%20mit-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
 
 ## Lizenz

@@ -27,7 +27,7 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 * Übernimmt die Bewewgungsdaten vom Melder und verarbeitet bzw. reicht sie weiter.
 * Einstellung eines Helligkeitswertes, ab welchem weiterverarbeitet werden soll.
 * Zusätzlich bzw. ausschließlich kann ein Script ausgeführt werden.
-* Über die Funktion _TPD_SetThreshold(id, wert)_ kann der Schwellwert der Helligkeit gesetzt werden.
+* Über die Funktion _TPD_SetThreshold(id, wert)_ kann der Schwellwert der Helligkeit gesetzt werden (Hinweis beachten).
 
 ### 2. Voraussetzungen
 
@@ -58,10 +58,10 @@ Einem hinterlegtem Script werden folgende Konfigurationswerte mitgegeben:
   
 Parameter           | Beschreibung
 ------------------- | ---------------------------------
-MotionVariable      | ID der Bewegungsvariable, Zugriff im Skript via $_IPS['MotionVariable']
-BrightnessVariable  | ID der Helligkeitsvariable, Zugriff im Skript via $_IPS['BrightnessVariable']
-SwitchVariable      | ID der Schaltvariable, Zugriff im Skript via $_IPS['SwitchVariable']
-ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via $_IPS['ThresholdValue']
+MotionVariable      | ID der Bewegungsvariable, Zugriff im Skript via _$_IPS['MotionVariable']_
+BrightnessVariable  | ID der Helligkeitsvariable, Zugriff im Skript via _$_IPS['BrightnessVariable']_
+SwitchVariable      | ID der Schaltvariable, Zugriff im Skript via _$_IPS['SwitchVariable']_
+ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via _$_IPS['ThresholdValue']_
 
 ### 5. Statusvariablen und Profile
 
@@ -84,7 +84,8 @@ Beispiel:
 `void TPD_SetThreshold(int $InstanzID, int wert);`  
 Setzt den Helligkeits-Schwellwert auf den neuen Lux-'wert'.  
 Die Funktion liefert true im Erfolgsfall.  
-_HINWEIS_: Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.
+  
+**_HINWEIS_**: **Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.**
 
 Beispiel:  
 `TPD_SetThreshold(12345, 50);`  
@@ -118,7 +119,7 @@ v1.0.20170125
 ## Spenden
 
 Die Software ist für die nicht kommzerielle Nutzung kostenlos, Schenkungen als Unterstützung für den Entwickler bitte hier:  
-[![Donate](https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
+[![License](https://img.shields.io/badge/Einfach%20spenden%20mit-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
 
 ## Lizenz
 

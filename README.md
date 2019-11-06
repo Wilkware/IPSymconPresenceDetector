@@ -58,10 +58,10 @@ Einem hinterlegtem Script werden folgende Konfigurationswerte mitgegeben:
   
 Parameter           | Beschreibung
 ------------------- | ---------------------------------
-MotionVariable      | ID der Bewegungsvariable, Zugriff im Skript via _$_IPS['MotionVariable']_
-BrightnessVariable  | ID der Helligkeitsvariable, Zugriff im Skript via _$_IPS['BrightnessVariable']_
-SwitchVariable      | ID der Schaltvariable, Zugriff im Skript via _$_IPS['SwitchVariable']_
-ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via _$_IPS['ThresholdValue']_
+MotionVariable      | ID der Bewegungsvariable, Zugriff im Skript via *$_IPS['MotionVariable']*
+BrightnessVariable  | ID der Helligkeitsvariable, Zugriff im Skript via *$_IPS['BrightnessVariable']*
+SwitchVariable      | ID der Schaltvariable, Zugriff im Skript via *$_IPS['SwitchVariable']*
+ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via *$_IPS['ThresholdValue']*
 
 ### 5. Statusvariablen und Profile
 

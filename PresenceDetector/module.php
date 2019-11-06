@@ -1,6 +1,9 @@
 <?php
 
-require_once __DIR__.'/../libs/traits.php';  // Allgemeine Funktionen
+declare(strict_types=1);
+
+// Allgemeine Funktionen
+require_once __DIR__ . '/../libs/traits.php';
 
 // CLASS PresenceDetector
 class PresenceDetector extends IPSModule
@@ -46,7 +49,7 @@ class PresenceDetector extends IPSModule
             case VM_UPDATE:
                 if ($senderID != $this->ReadPropertyInteger('MotionVariable')) {
                     // Safety Check
-                    $this->SendDebug('MessageSink', $senderID.' unbekannt!');
+                    $this->SendDebug('MessageSink', $senderID . ' unbekannt!');
                     break;
                 }
                 if ($data[0] == true && $data[1] == true) { // OnChange auf TRUE, d.h. Bewegung erkannt
@@ -74,11 +77,10 @@ class PresenceDetector extends IPSModule
             $bv = GetValue($this->ReadPropertyInteger('BrightnessVariable'));
             $tv = $this->ReadPropertyInteger('ThresholdValue');
             if ($tv != 0 && $bv > $tv) {
-                $this->SendDebug('SwitchState', 'Oberhalb Schwellwert: '.$bv.'(Schwellwert: '.$tv.')');
-
+                $this->SendDebug('SwitchState', 'Oberhalb Schwellwert: ' . $bv . '(Schwellwert: ' . $tv . ')');
                 return; // nix zu tun
             }
-            $this->SendDebug('SwitchState', 'Immer oder unterhalb Schwellwert: '.$bv.' (Schwellwert: '.$tv.')');
+            $this->SendDebug('SwitchState', 'Immer oder unterhalb Schwellwert: ' . $bv . ' (Schwellwert: ' . $tv . ')');
         }
         // Variable schalten
         if ($this->ReadPropertyInteger('SwitchVariable') != 0) {
@@ -93,7 +95,7 @@ class PresenceDetector extends IPSModule
                     $this->SendDebug('SwitchState', 'Gerät konnte nicht eingeschalten werden (UNREACH)!');
                 }
             }
-            $this->SendDebug('SwitchState', 'Variable (#'.$sv.') auf true geschalten!');
+            $this->SendDebug('SwitchState', 'Variable (#' . $sv . ') auf true geschalten!');
         }
         // Script ausführen
         if ($this->ReadPropertyInteger('ScriptVariable') != 0) {
@@ -106,7 +108,7 @@ class PresenceDetector extends IPSModule
                     $this->ReadPropertyInteger('ScriptVariable'),
                     ['MotionVariable' => $mID, 'BrightnessVariable' => $bID, 'SwitchVariable' => $sID, 'ThresholdValue' => $tVA]
                 );
-                $this->SendDebug('SwitchState', 'Script Return Value: '.$ret);
+                $this->SendDebug('SwitchState', 'Script Return Value: ' . $ret);
             }
         }
     }
@@ -118,7 +120,6 @@ class PresenceDetector extends IPSModule
      * TPD_SetThreshold($id, $threshold);
      *
      * @param bool $threshold Helligkeitsschwellwert ab welchem geschalten werden soll.
-     *
      * @return bool true if successful, otherwise false.
      */
     public function SetThreshold(int $threshold)
@@ -126,10 +127,8 @@ class PresenceDetector extends IPSModule
         if ((($threshold % 5) == 0) && $threshold >= 0 && $threshold <= 50 || $threshold = 75 || $threshold = 100) {
             IPS_SetProperty($this->InstanceID, 'ThresholdValue', $threshold);
             IPS_ApplyChanges($this->InstanceID);
-
             return true;
         }
-
         return false;
     }
 }

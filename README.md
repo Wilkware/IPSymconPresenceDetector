@@ -74,6 +74,8 @@ Es ist keine weitere Steuerung oder gesonderte Darstellung integriert.
 
 ### 7. PHP-Befehlsreferenz
 
+Funktion __SwitchState__:
+
 ```php
 void TPD_SwitchState(int $InstanzID);
 ```
@@ -87,6 +89,10 @@ Beispiel:
 ```php
 TPD_SwitchState(12345);
 ```
+
+Schaltet die in der Instanz hinterlegte Schaltvariable.
+
+Funktion __SetThreshold__:
 
 ```php
 void TPD_SetThreshold(int $InstanzID, int wert);

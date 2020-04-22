@@ -53,6 +53,7 @@ Helligkeitsvariable | Quellvariable, über welche die Helligkeit abgefragt werde
 Schwellwert         | Schwellwert, von 0 bis 100 Lux.
 Schaltvariable      | Zielvariable, die bei hinreichender Bedingung geschalten wird (true).
 Skript              | Script(auswahl), welches zum Einsatz kommen soll.
+Zeitplan            | Wochenprogram, welches den Bewegungsmelder zeitgesteuert aktiviert bzw. deaktiviert.
 Statusvariable      | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
 
 Einem hinterlegtem Script werden folgende Konfigurationswerte mitgegeben:  
@@ -95,9 +96,7 @@ Die Funktion liefert true im Erfolgsfall.
   
 **_HINWEIS_**: **Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.**
 
-Beispiel:  
-`TPD_SetThreshold(12345, 50);`  
-Setzt den Schwellwert auf 50 Lux.
+Beispiel: `TPD_SetThreshold(12345, 50);` Setzt den Schwellwert auf 50 Lux.
 
 ### 8. Versionshistorie
 

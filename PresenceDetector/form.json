@@ -21,7 +21,12 @@
     },
     {"type": "SelectVariable", "name": "SwitchVariable", "caption": "Switch Variable:" },
     {"type": "SelectScript", "name": "ScriptVariable", "caption": "Script:" },
+    {"type": "SelectEvent", "name": "EventVariable", "caption": "Schedule:" },
     {"type": "Label", "label": "Advanced settings:" },
     {"type": "CheckBox", "name": "OnlyBool", "caption": "State variable is only a simple boolean!" }
+  ],
+  "actions": [
+    {"type": "Label", "caption": "If a time-controlled activation or deactivation of the machine is to be carried out, you can create a corresponding week program with the help of the button. It is created below the instance. It can then be set to your own requirements and stored as a time switch.\nNOTE: An inactive week program is treated like a non-existent or selected timer!" },
+    {"type": "Button", "caption": "ADD SCHEDULE", "onClick": "TLA_CreateSchedule($id);"}
   ]
 }

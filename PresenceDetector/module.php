@@ -2,13 +2,21 @@
 
 declare(strict_types=1);
 
-// Allgemeine Funktionen
-require_once __DIR__ . '/../libs/traits.php';
+require_once __DIR__ . '/../libs/traits.php';  // General helper functions
 
 // CLASS PresenceDetector
 class PresenceDetector extends IPSModule
 {
     use DebugHelper;
+    use EventHelper;
+
+    // Schedule constant
+    const SCHEDULE_NAME = 'Zeitplan';
+    const SCHEDULE_IDENT = 'circuit_diagram';
+    const SCHEDULE_SWITCH = [
+        1 => ['Aktiv', 0x00FF00, ''],
+        2 => ['Inaktiv', 0xFF0000, ''],
+    ];
 
     public function Create()
     {
@@ -18,6 +26,7 @@ class PresenceDetector extends IPSModule
         $this->RegisterPropertyInteger('BrightnessVariable', 0);
         $this->RegisterPropertyInteger('ThresholdValue', 0);
         $this->RegisterPropertyInteger('SwitchVariable', 0);
+        $this->RegisterPropertyInteger('EventVariable', 0);
         $this->RegisterPropertyInteger('ScriptVariable', 0);
         $this->RegisterPropertyBoolean('OnlyBool', false);
     }
@@ -47,12 +56,22 @@ class PresenceDetector extends IPSModule
         // $this->SendDebug('MessageSink', 'SenderId: '. $senderID . 'Data: ' . print_r($data, true), 0);
         switch ($message) {
             case VM_UPDATE:
+                // Safety Check
                 if ($senderID != $this->ReadPropertyInteger('MotionVariable')) {
-                    // Safety Check
                     $this->SendDebug('MessageSink', $senderID . ' unbekannt!');
                     break;
                 }
-                if ($data[0] == true && $data[1] == true) { // OnChange auf TRUE, d.h. Bewegung erkannt
+                // Wochenprogramm auswerten!
+                $eid = $this->ReadPropertyInteger('EventVariable');
+                if ($eid != 0) {
+                    $state = $this->GetWeeklyScheduleInfo($eid);
+                    if ($state['WeekPlanActiv'] == 1 && $state['ActionID'] == 2) {
+                        $this->SendDebug('MessageSink', 'Wochenprogramm hinterlegt und Zustand ist inaktiv!');
+                        break;
+                    }
+                }
+                // OnChange auf TRUE, d.h. Bewegung erkannt
+                if ($data[0] == true && $data[1] == true) {
                     $this->SendDebug('MessageSink', 'OnChange auf TRUE - Bewegung erkannt');
                     $this->SwitchState();
                 } elseif ($data[0] == false && $data[1] == true) { // OnChange auf FALSE, d.h. keine Bewegung
@@ -130,5 +149,17 @@ class PresenceDetector extends IPSModule
             return true;
         }
         return false;
+    }
+
+    /**
+     * This function will be available automatically after the module is imported with the module control.
+     * Using the custom prefix this function will be callable from PHP and JSON-RPC through:
+     *
+     * TLA_CreateSchedule($id);
+     *
+     */
+    public function CreateSchedule()
+    {
+        $this->CreateWeeklySchedule($this->InstanceID, self::SCHEDULE_NAME, self::SCHEDULE_IDENT, self::SCHEDULE_SWITCH, -1);
     }
 }

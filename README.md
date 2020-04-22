@@ -1,8 +1,8 @@
 # Toolmatic Presence Detector (Präsenzmelder)
 
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-[![Product](https://img.shields.io/badge/Symcon%20Version-5.0%20%3E-blue.svg)](https://www.symcon.de/produkt/)
-[![Version](https://img.shields.io/badge/Modul%20Version-1.3.20191105-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
+[![Product](https://img.shields.io/badge/Symcon%20Version-5.1%20%3E-blue.svg)](https://www.symcon.de/produkt/)
+[![Version](https://img.shields.io/badge/Modul%20Version-2.0.20200422-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Actions](https://github.com/Wilkware/IPSymconPresenceDetector/workflows/Check%20Style/badge.svg)](https://github.com/Wilkware/IPSymconPresenceDetector/actions)
 
@@ -26,12 +26,13 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 
 * Übernimmt die Bewewgungsdaten vom Melder und verarbeitet bzw. reicht sie weiter.
 * Einstellung eines Helligkeitswertes, ab welchem weiterverarbeitet werden soll.
+* Hinterlegung eines Wochenplans zum gezielten Aktivieren bzw. Deaktivierung des Melders
 * Zusätzlich bzw. ausschließlich kann ein Script ausgeführt werden.
 * Über die Funktion _TPD_SetThreshold(id, wert)_ kann der Schwellwert der Helligkeit gesetzt werden (Hinweis beachten).
 
 ### 2. Voraussetzungen
 
-* IP-Symcon ab Version 5.0
+* IP-Symcon ab Version 5.1
 
 ### 3. Installation
 
@@ -73,7 +74,7 @@ Es ist keine weitere Steuerung oder gesonderte Darstellung integriert.
 
 ### 7. PHP-Befehlsreferenz
 
-`void TPD_SwitchState(int $InstanzID);`  
+```php void TPD_SwitchState(int $InstanzID);```
 Schaltet bei hinreichender Bedingung die Schaltervariable an.  
 Die Funktion liefert keinerlei Rückgabewert.  
 Direkter Aufruf macht aber eigentlich kein Sinn.  
@@ -92,6 +93,13 @@ Beispiel:
 Setzt den Schwellwert auf 50 Lux.
 
 ### 8. Versionshistorie
+
+v2.0.20200422
+
+* _NEU_: Zeitplan hinzugefügt
+* _NEU_: Unterstützung für die Erstellung eines Wochenplans
+* _FIX_: Interne Bibliotheken überarbeitet
+* _FIX_: Dokumentation überarbeitet
 
 v1.3.20191105
 

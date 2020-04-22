@@ -74,8 +74,6 @@ Es ist keine weitere Steuerung oder gesonderte Darstellung integriert.
 
 ### 7. PHP-Befehlsreferenz
 
-Funktion __SwitchState__:
-
 ```php
 void TPD_SwitchState(int $InstanzID);
 ```
@@ -84,15 +82,9 @@ Schaltet bei hinreichender Bedingung die Schaltervariable an.
 Die Funktion liefert keinerlei Rückgabewert.  
 Direkter Aufruf macht aber eigentlich kein Sinn.  
 
-Beispiel:
-
-```php
-TPD_SwitchState(12345);
-```
-
+Beispiel:  
+`TPD_SwitchState(12345);`  
 Schaltet die in der Instanz hinterlegte Schaltvariable.
-
-Funktion __SetThreshold__:
 
 ```php
 void TPD_SetThreshold(int $InstanzID, int wert);
@@ -103,12 +95,8 @@ Die Funktion liefert true im Erfolgsfall.
   
 **_HINWEIS_**: **Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.**
 
-Beispiel:
-
-```php
-TPD_SetThreshold(12345, 50);
-```
-
+Beispiel:  
+`TPD_SetThreshold(12345, 50);`  
 Setzt den Schwellwert auf 50 Lux.
 
 ### 8. Versionshistorie

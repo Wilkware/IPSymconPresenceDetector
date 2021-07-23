@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../libs/traits.php';  // General helper functions
+// General functions
+require_once __DIR__ . '/../libs/_traits.php';
 
 // CLASS PresenceDetector
 class PresenceDetector extends IPSModule
 {
     use DebugHelper;
     use EventHelper;
+    use ProfileHelper;
 
     // Schedule constant
     const SCHEDULE_NAME = 'Zeitplan';
@@ -18,6 +20,9 @@ class PresenceDetector extends IPSModule
         2 => ['Inaktiv', 0xFF0000, ''],
     ];
 
+    /**
+     * Create.
+     */
     public function Create()
     {
         //Never delete this line!
@@ -29,8 +34,12 @@ class PresenceDetector extends IPSModule
         $this->RegisterPropertyInteger('EventVariable', 0);
         $this->RegisterPropertyInteger('ScriptVariable', 0);
         $this->RegisterPropertyBoolean('OnlyBool', false);
+        $this->RegisterPropertyBoolean('ThresholdVariable', false);
     }
 
+    /**
+     * Apply Configuration Changes.
+     */
     public function ApplyChanges()
     {
         if ($this->ReadPropertyInteger('MotionVariable') != 0) {
@@ -38,6 +47,29 @@ class PresenceDetector extends IPSModule
         }
         //Never delete this line!
         parent::ApplyChanges();
+        // Profiles
+        $association = [
+            [0, 'Always', '', 0xFFFF00],
+            [5, '5 lx', '', 0xFFFF00],
+            [10, '10 lx', '', 0xFFFF00],
+            [15, '15 lx', '', 0xFFFF00],
+            [20, '20 lx', '', 0xFFFF00],
+            [25, '25 lx', '', 0xFFFF00],
+            [30, '30 lx', '', 0xFFFF00],
+            [35, '35 lx', '', 0xFFFF00],
+            [40, '40 lx', '', 0xFFFF00],
+            [45, '45 lx', '', 0xFFFF00],
+            [50, '50 lx', '', 0xFFFF00],
+            [75, '75 lx', '', 0xFFFF00],
+            [100, '100 lx', '', 0xFFFF00],
+        ];
+        $this->RegisterProfile(vtInteger, 'TPD.Threshold', 'Light', '', '', 0, 0, 0, 0, $association);
+        // Threshold
+        $threshold = $this->ReadPropertyBoolean('ThresholdVariable');
+        $this->MaintainVariable('BrightnessThreshold', $this->Translate('Brightness threshold'), vtInteger, 'TPD.Threshold', 2, $threshold);
+        if ($threshold) {
+            $this->EnableAction('BrightnessThreshold');
+        }
         //Create our trigger
         if (IPS_VariableExists($this->ReadPropertyInteger('MotionVariable'))) {
             $this->RegisterMessage($this->ReadPropertyInteger('MotionVariable'), VM_UPDATE);
@@ -45,20 +77,19 @@ class PresenceDetector extends IPSModule
     }
 
     /**
-     * Interne Funktion des SDK.
-     * data[0] = neuer Wert
-     * data[1] = wurde Wert geändert?
-     * data[2] = alter Wert
-     * data[3] = Timestamp.
+     * MessageSink
+     * data[0] = new Value
+     * data[1] = value changed?
+     * data[2] = old value
+     * data[3] = timestamp.
      */
     public function MessageSink($timeStamp, $senderID, $message, $data)
     {
-        // $this->SendDebug('MessageSink', 'SenderId: '. $senderID . 'Data: ' . print_r($data, true), 0);
         switch ($message) {
             case VM_UPDATE:
                 // Safety Check
                 if ($senderID != $this->ReadPropertyInteger('MotionVariable')) {
-                    $this->SendDebug('MessageSink', $senderID . ' unbekannt!');
+                    $this->SendDebug(__FUNCTION__, $senderID . ' unknown!');
                     break;
                 }
                 // Wochenprogramm auswerten!
@@ -66,21 +97,40 @@ class PresenceDetector extends IPSModule
                 if ($eid != 0) {
                     $state = $this->GetWeeklyScheduleInfo($eid);
                     if ($state['WeekPlanActiv'] == 1 && $state['ActionID'] == 2) {
-                        $this->SendDebug('MessageSink', 'Wochenprogramm hinterlegt und Zustand ist inaktiv!');
+                        $this->SendDebug(__FUNCTION__, 'Schedule plan is inactiv!');
                         break;
                     }
                 }
                 // OnChange auf TRUE, d.h. Bewegung erkannt
                 if ($data[0] == true && $data[1] == true) {
-                    $this->SendDebug('MessageSink', 'OnChange auf TRUE - Bewegung erkannt');
+                    $this->SendDebug(__FUNCTION__, 'OnChange on TRUE - motion detected');
                     $this->SwitchState();
                 } elseif ($data[0] == false && $data[1] == true) { // OnChange auf FALSE, d.h. keine Bewegung
-                    $this->SendDebug('MessageSink', 'OnChange auf FALSE - keine Bewegung');
+                    $this->SendDebug(__FUNCTION__, 'OnChange on FALSE - no motion');
                 } else { // OnChange auf FALSE, d.h. keine Bewegung
-                    $this->SendDebug('MessageSink', 'OnChange unverändert - keine Zustandsänderung');
+                    $this->SendDebug(__FUNCTION__, 'OnChange unchanged - status not changed');
                 }
             break;
         }
+    }
+
+    /**
+     * RequestAction.
+     *
+     *  @param string $ident Ident.
+     *  @param string $value Value.
+     */
+    public function RequestAction($ident, $value)
+    {
+        // Debug output
+        $this->SendDebug(__FUNCTION__, $ident . ' => ' . $value);
+        // Ident == OnXxxxxYyyyy
+        switch ($ident) {
+            case 'BrightnessThreshold':
+                $this->SetValueInteger($ident, $value);
+            break;
+        }
+        //return true;
     }
 
     /**
@@ -95,71 +145,91 @@ class PresenceDetector extends IPSModule
         if ($this->ReadPropertyInteger('BrightnessVariable') != 0) {
             $bv = GetValue($this->ReadPropertyInteger('BrightnessVariable'));
             $tv = $this->ReadPropertyInteger('ThresholdValue');
-            if ($tv != 0 && $bv > $tv) {
-                $this->SendDebug('SwitchState', 'Oberhalb Schwellwert: ' . $bv . '(Schwellwert: ' . $tv . ')');
-                return; // nix zu tun
+            if ($this->ReadPropertyBoolean('ThresholdVariable')) {
+                $tv = $this->GetValue('BrightnessThreshold');
             }
-            $this->SendDebug('SwitchState', 'Immer oder unterhalb Schwellwert: ' . $bv . ' (Schwellwert: ' . $tv . ')');
+            if ($tv != 0 && $bv > $tv) {
+                $this->SendDebug(__FUNCTION__, 'Above threshold: ' . $bv . '(Threshold: ' . $tv . ')');
+                return; // nothing to do
+            }
+            $this->SendDebug(__FUNCTION__, 'Always or below threshold: ' . $bv . ' (Threshold: ' . $tv . ')');
         }
-        // Variable schalten
+        // Switch variable
         if ($this->ReadPropertyInteger('SwitchVariable') != 0) {
             $sv = $this->ReadPropertyInteger('SwitchVariable');
             if ($this->ReadPropertyBoolean('OnlyBool') == true) {
                 SetValueBoolean($sv, true);
             } else {
-                //$pid = IPS_GetParent($sv);
-                //$ret = @HM_WriteValueBoolean($pid, 'STATE', true); //Ger�t einschalten
-                $ret = @RequestAction($sv, true); //Gerät einschalten
+                $ret = @RequestAction($sv, true); // switch on device
                 if ($ret === false) {
-                    $this->SendDebug('SwitchState', 'Gerät konnte nicht eingeschalten werden (UNREACH)!');
+                    $this->SendDebug(__FUNCTION__, 'Device could not be switched on (UNREACH)!');
                 }
             }
-            $this->SendDebug('SwitchState', 'Variable (#' . $sv . ') auf true geschalten!');
+            $this->SendDebug(__FUNCTION__, 'Variable (#' . $sv . ') on TRUE switched!');
         }
-        // Script ausführen
+        // Run script
         if ($this->ReadPropertyInteger('ScriptVariable') != 0) {
             if (IPS_ScriptExists($this->ReadPropertyInteger('ScriptVariable'))) {
                 $mID = $this->ReadPropertyInteger('MotionVariable');
                 $bID = $this->ReadPropertyInteger('BrightnessVariable');
                 $sID = $this->ReadPropertyInteger('SwitchVariable');
                 $tVA = $this->ReadPropertyInteger('ThresholdValue');
+                if ($this->ReadPropertyBoolean('ThresholdVariable')) {
+                    $tVA = $this->GetValue('BrightnessThreshold');
+                }
                 $ret = IPS_RunScriptEx(
                     $this->ReadPropertyInteger('ScriptVariable'),
                     ['MotionVariable' => $mID, 'BrightnessVariable' => $bID, 'SwitchVariable' => $sID, 'ThresholdValue' => $tVA]
                 );
-                $this->SendDebug('SwitchState', 'Script Return Value: ' . $ret);
+                $this->SendDebug(__FUNCTION__, 'Script return value: ' . $ret);
             }
         }
     }
 
     /**
-     * This function will be available automatically after the module is imported with the module control.
-     * Using the custom prefix this function will be callable from PHP and JSON-RPC through:.
-     *
-     * TPD_SetThreshold($id, $threshold);
-     *
-     * @param bool $threshold Helligkeitsschwellwert ab welchem geschalten werden soll.
-     * @return bool true if successful, otherwise false.
-     */
-    public function SetThreshold(int $threshold)
-    {
-        if ((($threshold % 5) == 0) && $threshold >= 0 && $threshold <= 50 || $threshold = 75 || $threshold = 100) {
-            IPS_SetProperty($this->InstanceID, 'ThresholdValue', $threshold);
-            IPS_ApplyChanges($this->InstanceID);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * This function will be available automatically after the module is imported with the module control.
-     * Using the custom prefix this function will be callable from PHP and JSON-RPC through:
-     *
-     * TLA_CreateSchedule($id);
-     *
+     * Creates a schedule plan.
      */
     public function CreateSchedule()
     {
-        $this->CreateWeeklySchedule($this->InstanceID, self::SCHEDULE_NAME, self::SCHEDULE_IDENT, self::SCHEDULE_SWITCH, -1);
+        $eid = $this->CreateWeeklySchedule($this->InstanceID, self::SCHEDULE_NAME, self::SCHEDULE_IDENT, self::SCHEDULE_SWITCH, -1);
+        if ($eid !== false) {
+            $this->UpdateFormField('EventVariable', 'value', $eid);
+        }
+    }
+
+    /**
+     * Update a boolean value.
+     *
+     * @param string $ident Ident of the boolean variable
+     * @param bool   $value Value of the boolean variable
+     */
+    private function SetValueBoolean(string $ident, bool $value)
+    {
+        $id = $this->GetIDForIdent($ident);
+        SetValueBoolean($id, $value);
+    }
+
+    /**
+     * Update a string value.
+     *
+     * @param string $ident Ident of the string variable
+     * @param string $value Value of the string variable
+     */
+    private function SetValueString(string $ident, string $value)
+    {
+        $id = $this->GetIDForIdent($ident);
+        SetValueString($id, $value);
+    }
+
+    /**
+     * Update a integer value.
+     *
+     * @param string $ident Ident of the integer variable
+     * @param int    $value Value of the integer variable
+     */
+    private function SetValueInteger(string $ident, int $value)
+    {
+        $id = $this->GetIDForIdent($ident);
+        SetValueInteger($id, $value);
     }
 }

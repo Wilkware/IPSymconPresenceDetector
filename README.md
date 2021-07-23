@@ -1,8 +1,8 @@
 # Toolmatic Presence Detector (Präsenzmelder)
 
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-[![Product](https://img.shields.io/badge/Symcon%20Version-5.1%20%3E-blue.svg)](https://www.symcon.de/produkt/)
-[![Version](https://img.shields.io/badge/Modul%20Version-2.0.20200422-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
+[![Product](https://img.shields.io/badge/Symcon%20Version-5.2-blue.svg)](https://www.symcon.de/produkt/)
+[![Version](https://img.shields.io/badge/Modul%20Version-2.1.20210723-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Actions](https://github.com/Wilkware/IPSymconPresenceDetector/workflows/Check%20Style/badge.svg)](https://github.com/Wilkware/IPSymconPresenceDetector/actions)
 
@@ -28,11 +28,11 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 * Einstellung eines Helligkeitswertes, ab welchem weiterverarbeitet werden soll.
 * Hinterlegung eines Wochenplans zum gezielten Aktivieren bzw. Deaktivierung des Melders
 * Zusätzlich bzw. ausschließlich kann ein Script ausgeführt werden.
-* Über die Funktion _TPD_SetThreshold(id, wert)_ kann der Schwellwert der Helligkeit gesetzt werden (Hinweis beachten).
+* Der Helligkeitsschwellwert kann bei Bedarf auch über das Webfront gesetzt werden.
 
 ### 2. Voraussetzungen
 
-* IP-Symcon ab Version 5.1
+* IP-Symcon ab Version 5.2
 
 ### 3. Installation
 
@@ -42,19 +42,32 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-* Unter 'Instanz hinzufügen' ist das *Präsensmelder*-Modul (Alias: *Bewegungsmelder*) unter dem Hersteller '(Geräte)' aufgeführt.
+* Unter 'Instanz hinzufügen' ist das *Präsensmelder*-Modul (Alias: *Bewegungsmelder*) unter dem Hersteller _'(Geräte)'_ aufgeführt.
 
 __Konfigurationsseite__:
 
+> Geräte ...
+
 Name                | Beschreibung
 ------------------- | ---------------------------------
+Schaltvariable      | Zielvariable, die bei hinreichender Bedingung geschalten wird (true).
 Bewegungsvariable   | Statusvariable eines Bewegungsmelders (true = Anwesend; false = Abwesend).
 Helligkeitsvariable | Quellvariable, über welche die Helligkeit abgefragt werden kann, bei HmIP-SMI ist es ILLUMINATION.
 Schwellwert         | Schwellwert, von 0 bis 100 Lux.
-Schaltvariable      | Zielvariable, die bei hinreichender Bedingung geschalten wird (true).
-Skript              | Script(auswahl), welches zum Einsatz kommen soll.
+
+> Zeitsteuerung ...
+
+Name                | Beschreibung
+------------------- | ---------------------------------
 Zeitplan            | Wochenprogram, welches den Bewegungsmelder zeitgesteuert aktiviert bzw. deaktiviert.
-Statusvariable      | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
+
+> Erweiterte Einstellungen ...
+
+Name                         | Beschreibung
+-----------------------------| ---------------------------------
+Skript                       | Script(auswahl), welches zum Einsatz kommen soll.
+Checkpox Statusvariable      | Schalter, ob die Statusvariable über HM-Befehl geschaltet werden soll oder einfach ein nur einfacher boolscher Switch gemacht werden soll.
+Checkbox Schwellwert         | Schalter, ob eine Zustandsvariable für den Helligkeitsschwellwert angelegt werden soll.
 
 Einem hinterlegtem Script werden folgende Konfigurationswerte mitgegeben:  
   
@@ -67,11 +80,21 @@ ThresholdValue      | Wert von Schwellwert, Zugriff im Skript via *$_IPS['Thresh
 
 ### 5. Statusvariablen und Profile
 
-Es werden keine zusätzlichen Profile benötigt.
+Die Statusvariablen/Timer werden automatisch angelegt. Das Löschen einzelner kann zu Fehlfunktionen führen.
+
+Name                   | Typ       | Beschreibung
+---------------------- | --------- | ----------------
+Helligkeitsschwellwert | Integer   | Helligkeitswert ab welchem geschalten werden soll
+
+Folgende Profile werden angelegt:
+
+Name                   | Typ       | Beschreibung
+---------------------- | --------- | ----------------
+TPD.Threshold          | Integer   | Werte: Immer, 5, 10, 15, 20, 25, 30, 40, 45, 50, 75 und 100 Lux
 
 ### 6. WebFront
 
-Es ist keine weitere Steuerung oder gesonderte Darstellung integriert.
+Die erzeugten Variablen können direkt ins Webfront verlingt werden.  
 
 ### 7. PHP-Befehlsreferenz
 
@@ -85,18 +108,17 @@ Direkter Aufruf macht aber eigentlich kein Sinn.
 
 __Beispiel__: `TPD_SwitchState(12345);` Schaltet die in der Instanz hinterlegte Schaltvariable.
 
-```php
-void TPD_SetThreshold(int $InstanzID, int wert);
-```
-
-Setzt den Helligkeits-Schwellwert auf den neuen Lux-'wert'.  
-Die Funktion liefert true im Erfolgsfall.  
-  
-**_HINWEIS_**: **Durch das Aufrufen der Funktion wird die Konfiguration neu geschrieben, dieses kann bei gleichzeitig geöffneter Konfiguration (Konfigurationsformular) zu Verlust noch nicht gespeicherter Veränderungen führen.**
-
-__Beispiel__: `TPD_SetThreshold(12345, 50);` Setzt den Schwellwert auf 50 Lux.
-
 ### 8. Versionshistorie
+
+v2.1.20210723
+
+* _NEU_: Konfigurationsformular überarbeitet und vereinheitlicht
+* _NEU_: Schwellwert(Helligkeit) kann über Webfront(RequestAction) gesetzt bzw. manipuliert werden
+* _FIX_: Funktionen `TPD_Threshold` wegen Verwendung von IPS_SetProperty entfernt
+* _FIX_: Übersetzungen nachgezogen
+* _FIX_: Interne Bibliotheken überarbeitet und vereinheitlicht
+* _FIX_: Debug Meldungen überarbeitet
+* _FIX_: Dokumentation überarbeitet
 
 v2.0.20200422
 
@@ -126,13 +148,15 @@ v1.0.20170125
 
 ## Entwickler
 
-* Heiko Wilknitz ([@wilkware](https://github.com/wilkware))
+Seit nunmehr über 10 Jahren fasziniert mich das Thema Haussteuerung. In den letzten Jahren betätige ich mich auch intensiv in der IP-Symcon Community und steuere dort verschiedenste Skript und Module bei. Ihr findet mich dort unter dem Namen @pitti ;-)
+
+[![GitHub](https://img.shields.io/badge/GitHub-@wilkware-blueviolet.svg?logo=github)](https://wilkware.github.io/)
 
 ## Spenden
 
-Die Software ist für die nicht kommzerielle Nutzung kostenlos, Schenkungen als Unterstützung für den Entwickler bitte hier:  
+Die Software ist für die nicht kommzerielle Nutzung kostenlos, über eine Spende bei Gefallen des Moduls würde ich mich freuen.
 
-[![License](https://img.shields.io/badge/Einfach%20spenden%20mit-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
+[![PayPal](https://img.shields.io/badge/PayPal-spenden-blue.svg?logo=paypal)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8816166)
 
 ## Lizenz
 

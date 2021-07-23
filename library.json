@@ -1,9 +1,12 @@
 {
-  "id": "{AF444ACB-60B1-ABF0-C67D-EE4005079A32}",
-  "author": "Wilkware (@Pitti)",
-  "name": "Toolmatic Presence Detector",
-  "url": "https://github.com/Wilkware",
-  "version": "2.0",
-  "build": 20200422,
-  "date": 1587513600
+    "id": "{AF444ACB-60B1-ABF0-C67D-EE4005079A32}",
+    "author": "Wilkware (@Pitti)",
+    "name": "Toolmatic Presence Detector",
+    "url": "https://github.com/Wilkware",
+    "compatibility": {
+        "version": "5.2"
+    },
+    "version": "2.1",
+    "build": 20210723,
+    "date": 1627034400
 }

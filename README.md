@@ -1,4 +1,4 @@
-# Toolmatic Presence Detector (Präsenzmelder)
+# Präsenzmelder (Presence Detector)
 
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 [![Product](https://img.shields.io/badge/Symcon%20Version-5.2-blue.svg)](https://www.symcon.de/produkt/)

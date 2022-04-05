@@ -1,12 +1,12 @@
 # Präsenzmelder (Presence Detector)
 
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-[![Product](https://img.shields.io/badge/Symcon%20Version-5.2-blue.svg)](https://www.symcon.de/produkt/)
+[![Product](https://img.shields.io/badge/Symcon%20Version-6.0-blue.svg)](https://www.symcon.de/produkt/)
 [![Version](https://img.shields.io/badge/Modul%20Version-3.0.20220320-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Actions](https://github.com/Wilkware/IPSymconPresenceDetector/workflows/Check%20Style/badge.svg)](https://github.com/Wilkware/IPSymconPresenceDetector/actions)
 
-Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine Variable bzw. führt ein Skript aus.  
+Das Modul Präsenzmelder (Presence Detector) schaltet in Abhängigkeit von Bewegung(en) und Helligkeit ein oder mehrere Geräte ein bzw. führt ein Skript aus. Die Bewegungsdaten können dabei logisch verknüpft werden. Zusätzlich kann ein Schwellwert für die Helligkeit hinterlegt werden.  
 
 ## Inhaltverzeichnis
 
@@ -34,13 +34,13 @@ Der *Präsenzmelder* schaltet in Abhängigkeit von Bewegung und Helligkeit eine 
 
 ### 3. Installation
 
-* Über den Modul Store das Modul *Presence Detector* installieren.
+* Über den Modul Store das Modul _Präsenzmelder_ installieren.
 * Alternativ Über das Modul-Control folgende URL hinzufügen.  
 `https://github.com/Wilkware/IPSymconPresenceDetector` oder `git://github.com/Wilkware/IPSymconPresenceDetector.git`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-* Unter 'Instanz hinzufügen' ist das *Präsensmelder*-Modul (Alias: *Bewegungsmelder*) unter dem Hersteller '(Geräte)' aufgeführt.
+* Unter 'Instanz hinzufügen' ist das _Präsensmelder_-Modul (Alias: _Bewegungsmelder_) unter dem Hersteller '(Geräte)' aufgeführt.
 
 __Konfigurationsseite__:
 
@@ -80,10 +80,10 @@ Einem hinterlegtem Skript werden folgende Konfigurationswerte mitgegeben:
   
 Parameter            | Beschreibung
 -------------------- | ---------------------------------
-MotionVariable       | ID(s) der Bewegungsvariable(n), Zugriff im Skript via *$_IPS['MotionVariable']*
-BrightnessVariable   | ID der Helligkeitsvariable, Zugriff im Skript via *$_IPS['BrightnessVariable']*
-SwitchVariable       | ID(s) der Schaltvariable(s), Zugriff im Skript via *$_IPS['SwitchVariable']*
-ThresholdValue       | Wert von Schwellwert, Zugriff im Skript via *$_IPS['ThresholdValue']*
+MotionVariable       | ID(s) der Bewegungsvariable(n), Zugriff im Skript via _$_IPS['MotionVariable']_
+BrightnessVariable   | ID der Helligkeitsvariable, Zugriff im Skript via _$_IPS['BrightnessVariable']_
+SwitchVariable       | ID(s) der Schaltvariable(s), Zugriff im Skript via _$_IPS['SwitchVariable']_
+ThresholdValue       | Wert von Schwellwert, Zugriff im Skript via _$_IPS['ThresholdValue']_
 
 ### 5. Statusvariablen und Profile
 
@@ -111,55 +111,55 @@ Ein direkter Aufruf von öffentlichen Funktionen ist nicht notwendig!
 
 v3.0.20220320
 
-* *NEU*: Zweiten Bewegungsmelder hinzugefügt
-* *NEU*: Logische Verknüpfung der Bewegungsmelder eingeführt
-* *NEU*: Kompatibilität auf IPS 6.0 hoch gesetzt
-* *NEU*: Bibliotheks- bzw. Modulinfos vereinheitlicht
-* *NEU*: Konfigurationsdialog überarbeitet (v6 Möglichkeiten genutzt)
-* *NEU*: Auswahl des Helligkeitsschwellwertes erweitert
-* *NEU*: Konfiguration der Zeitsteuerung überarbeitet
-* *NEU*: Umschalten zwischen einem oder mehreren schaltbaren Geräten
-* *NEU*: Eine reine boolesche Schaltvariable (ein Gerät) wird automatisch erkannt
-* *NEU*: Referenzieren der Gerätevariablen hinzugefügt (sicheres Löschen)
-* *FIX*: Funktion `TPD_SwitchState` wegen neuer Prozessverarbeitung entfernt
-* *FIX*: Interne Bibliotheken erweitert und vereinheitlicht
-* *FIX*: Markdown der Dokumentation überarbeitet
+* _NEU_: Zweiten Bewegungsmelder hinzugefügt
+* _NEU_: Logische Verknüpfung der Bewegungsmelder eingeführt
+* _NEU_: Kompatibilität auf IPS 6.0 hoch gesetzt
+* _NEU_: Bibliotheks- bzw. Modulinfos vereinheitlicht
+* _NEU_: Konfigurationsdialog überarbeitet (v6 Möglichkeiten genutzt)
+* _NEU_: Auswahl des Helligkeitsschwellwertes erweitert
+* _NEU_: Konfiguration der Zeitsteuerung überarbeitet
+* _NEU_: Umschalten zwischen einem oder mehreren schaltbaren Geräten
+* _NEU_: Eine reine boolesche Schaltvariable (ein Gerät) wird automatisch erkannt
+* _NEU_: Referenzieren der Gerätevariablen hinzugefügt (sicheres Löschen)
+* _FIX_: Funktion `TPD_SwitchState` wegen neuer Prozessverarbeitung entfernt
+* _FIX_: Interne Bibliotheken erweitert und vereinheitlicht
+* _FIX_: Markdown der Dokumentation überarbeitet
 
 v2.1.20210723
 
-* *NEU*: Konfigurationsformular überarbeitet und vereinheitlicht
-* *NEU*: Schwellwert(Helligkeit) kann über Webfront(RequestAction) gesetzt bzw. manipuliert werden
-* *FIX*: Funktion `TPD_Threshold` wegen Verwendung von IPS_SetProperty entfernt
-* *FIX*: Übersetzungen nachgezogen
-* *FIX*: Interne Bibliotheken überarbeitet und vereinheitlicht
-* *FIX*: Debug Meldungen überarbeitet
-* *FIX*: Dokumentation überarbeitet
+* _NEU_: Konfigurationsformular überarbeitet und vereinheitlicht
+* _NEU_: Schwellwert(Helligkeit) kann über Webfront(RequestAction) gesetzt bzw. manipuliert werden
+* _FIX_: Funktion `TPD_Threshold` wegen Verwendung von IPS_SetProperty entfernt
+* _FIX_: Übersetzungen nachgezogen
+* _FIX_: Interne Bibliotheken überarbeitet und vereinheitlicht
+* _FIX_: Debug Meldungen überarbeitet
+* _FIX_: Dokumentation überarbeitet
 
 v2.0.20200422
 
-* *NEU*: Zeitplan hinzugefügt
-* *NEU*: Unterstützung für die Erstellung eines Wochenplans
-* *FIX*: Interne Bibliotheken überarbeitet
-* *FIX*: Dokumentation überarbeitet
+* _NEU_: Zeitplan hinzugefügt
+* _NEU_: Unterstützung für die Erstellung eines Wochenplans
+* _FIX_: Interne Bibliotheken überarbeitet
+* _FIX_: Dokumentation überarbeitet
 
 v1.3.20191105
 
-* *NEU*: Skriptaufruf auf IPS_RunScriptEx umgestellt (Variablenübergabe)
-* *FIX*: Debugausgabe war fehlerhaft bei hinterlegtem Skript
-* *FIX*: Dokumentation überarbeitet
+* _NEU_: Skriptaufruf auf IPS_RunScriptEx umgestellt (Variablenübergabe)
+* _FIX_: Debugausgabe war fehlerhaft bei hinterlegtem Skript
+* _FIX_: Dokumentation überarbeitet
 
 v1.2.20190818
 
-* *NEU*: Umstellung für Module Store
-* *FIX*: Dokumentation überarbeitet
+* _NEU_: Umstellung für Module Store
+* _FIX_: Dokumentation überarbeitet
 
 v1.1.20170322
 
-* *FIX*: Anpassungen für IPS Version 5
+* _FIX_: Anpassungen für IPS Version 5
 
 v1.0.20170125
 
-* *NEU*: Initialversion
+* _NEU_: Initialversion
 
 ## Entwickler
 

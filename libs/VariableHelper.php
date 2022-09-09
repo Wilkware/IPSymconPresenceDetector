@@ -60,4 +60,18 @@ trait VariableHelper
             SetValueInteger($id, $value);
         }
     }
+
+    /**
+     * Update a float value.
+     *
+     * @param string $ident Ident of the float variable
+     * @param float  $value Value of the float variable
+     */
+    protected function SetValueFloat(string $ident, float $value)
+    {
+        $id = $this->GetIDForIdent($ident);
+        if ($id !== false) {
+            SetValueFloat($id, $value);
+        }
+    }
 }

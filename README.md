@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
 [![Product](https://img.shields.io/badge/Symcon%20Version-6.0-blue.svg)](https://www.symcon.de/produkt/)
-[![Version](https://img.shields.io/badge/Modul%20Version-3.0.20220320-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
+[![Version](https://img.shields.io/badge/Modul%20Version-3.1.20220909-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![Actions](https://github.com/Wilkware/IPSymconPresenceDetector/workflows/Check%20Style/badge.svg)](https://github.com/Wilkware/IPSymconPresenceDetector/actions)
 
@@ -108,6 +108,12 @@ Die erzeugten Variablen können direkt ins Webfront verlinkt werden.
 Ein direkter Aufruf von öffentlichen Funktionen ist nicht notwendig!
 
 ### 8. Versionshistorie
+
+v3.1.20220909
+
+* _NEU_: Zeitfenster wird jetzt bei allen Verknüpfungen berücksichtigt
+* _FIX_: Doppelte Ausführung bei OR gefixt
+* _FIX_: Bibliotheken nachgezogen
 
 v3.0.20220320
 

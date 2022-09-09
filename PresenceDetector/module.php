@@ -265,7 +265,7 @@ class PresenceDetector extends IPSModule
                 } else { // OnChange on FALSE, i.e. no change of status
                     $this->SendDebug(__FUNCTION__, 'OnChange unchanged - status not changed');
                 }
-            break;
+                break;
         }
     }
 
@@ -337,6 +337,7 @@ class PresenceDetector extends IPSModule
         $this->SendDebug(__FUNCTION__, 'Sender: ' . $sender);
         // Check locical link
         $link = $this->ReadPropertyInteger('LogicalLink');
+        $time = $this->ReadPropertyInteger('SensorDelay');
         switch ($link) {
             case 0: // AND
                 // Timer expired ?
@@ -356,15 +357,31 @@ class PresenceDetector extends IPSModule
                 if ($trigger == 0) {
                     $this->SendDebug(__FUNCTION__, 'AND condition not fulfilled');
                     // AND condition not fulfilled => init all => wait
-                    $this->SetTimerInterval('TPD.Timer', $this->ReadPropertyInteger('SensorDelay'));
-                    $this->WriteAttributeInteger('Trigger', $sender);
+                    if ($time > 0) {
+                        $this->SetTimerInterval('TPD.Timer', $time);
+                        $this->WriteAttributeInteger('Trigger', $sender);
+                    }
                     return false; // we wait
                 }
                 break;
             case 1: // OR
-                $this->SendDebug(__FUNCTION__, 'OR switch allways');
-                // switch allways
-                return true;
+                // Timer expired ?
+                if ($sender == 0) {
+                    break;
+                }
+                // check pre condition
+                $trigger = $this->ReadAttributeInteger('Trigger');
+                $this->SendDebug(__FUNCTION__, 'Trigger (or): ' . $trigger);
+                if ($trigger == 0) {
+                    $this->SendDebug(__FUNCTION__, 'OR condition ');
+                    // OR condition fulfilled => fire and wait to block reswitch
+                    if ($time > 0) {
+                        $this->SetTimerInterval('TPD.Timer', $time);
+                        $this->WriteAttributeInteger('Trigger', $sender);
+                    }
+                    return true; // and wait
+                }
+                break;
             case 2: // NOT
                 $trigger = $this->ReadAttributeInteger('Trigger');
                 $this->SendDebug(__FUNCTION__, 'Trigger (not): ' . $trigger);
@@ -378,8 +395,10 @@ class PresenceDetector extends IPSModule
                 if (($sender != 0) && ($trigger == 0)) {
                     $this->SendDebug(__FUNCTION__, 'NOR condition still fulfilled (wait)');
                     // NOR condition still fulfilled => init all => wait
-                    $this->SetTimerInterval('TPD.Timer', $this->ReadPropertyInteger('SensorDelay'));
-                    $this->WriteAttributeInteger('Trigger', ($sender == $id1) ? $sender : -1);
+                    if ($time > 0) {
+                        $this->SetTimerInterval('TPD.Timer', $time);
+                        $this->WriteAttributeInteger('Trigger', ($sender == $id1) ? $sender : -1);
+                    }
                     return false; // we wait
                 }
                 break;

@@ -112,6 +112,7 @@ Ein direkter Aufruf von öffentlichen Funktionen ist nicht notwendig!
 v3.1.20220909
 
 * _NEU_: Zeitfenster wird jetzt bei allen Verknüpfungen berücksichtigt
+* _NEU_: Zeitfenster jetzt bis 2 Min einstellbar
 * _FIX_: Doppelte Ausführung bei OR gefixt
 * _FIX_: Bibliotheken nachgezogen
 

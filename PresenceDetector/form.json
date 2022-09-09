@@ -14,22 +14,22 @@
             "items": [
                 {"type": "RowLayout",
                     "items": [
-                        {"type": "SelectVariable", "name": "MotionVariable", "caption": "1. Motion Variable:", "width": "350px"},
-                        {"type": "Select", "name": "LogicalLink", "caption": "Link:", "width": "92px",
+                        {"type": "SelectVariable", "name": "MotionVariable", "caption": "1. Motion Variable:", "width": "340px"},
+                        {"type": "Select", "name": "LogicalLink", "caption": "Link:", "width": "102px",
                             "options": [
                                 {"label": "∧ (and)", "value": 0 },
                                 {"label": "∨ (or)", "value": 1 },
                                 {"label": "¬ (not)", "value": 2 }
                             ]
                         },
-                        {"type": "SelectVariable", "name": "SensorVariable", "caption": "2. Motion Variable:", "width": "350px"},
-                        {"type": "NumberSpinner",  "name": "SensorDelay", "caption": "Time frame:", "suffix": "ms", "minimum": 0, "maximum": 2000, "width": "92px"}
+                        {"type": "SelectVariable", "name": "SensorVariable", "caption": "2. Motion Variable:", "width": "340px"},
+                        {"type": "NumberSpinner",  "name": "SensorDelay", "caption": "Time frame:", "suffix": "ms", "minimum": 0, "maximum": 120000, "width": "102px"}
                     ]
                 },
                 {"type": "RowLayout",
                     "items": [
-                        {"type": "SelectVariable", "name": "BrightnessVariable", "caption": "Brightness Variable:", "width": "350px"},
-                        {"type": "Select", "name": "ThresholdValue", "caption": "Threshold Value:", "width": "92px",
+                        {"type": "SelectVariable", "name": "BrightnessVariable", "caption": "Brightness Variable:", "width": "340px"},
+                        {"type": "Select", "name": "ThresholdValue", "caption": "Threshold Value:", "width": "102px",
                             "options": [
                                 {"label": "Always     ", "value": 0 },
                                 {"label": "5 lx", "value": 5 },

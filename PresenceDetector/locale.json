@@ -1,7 +1,7 @@
 {
     "translations": {
         "de": {
-            "Presence Detector ": "Präsenzmelder",
+            "Presence Detector": "Präsenzmelder",
             "Motion Detector": "Bewegungsmelder",
             "\nPresence Detector\n ": "\nPräsenzmelder\n ",
             "This module is used to switch on a device depending on movement and brightness.": "Dieses Modul dient zum Einschalten eines Gerätes in Abhängigkeit von Bewegung und Helligkeit.",

@@ -116,7 +116,7 @@ v4.0.20240908
 * _FIX_: Namensnennung und Repo vereinheitlicht
 * _FIX_: Update Style-Checks
 * _FIX_: Übersetzungen überarbeitet und verbessert
-* _FIX_: Dokumentation vereinheitlicht 
+* _FIX_: Dokumentation vereinheitlicht
 
 v3.1.20220909
 

@@ -5,7 +5,9 @@ declare(strict_types=1);
 // General functions
 require_once __DIR__ . '/../libs/_traits.php';
 
-// CLASS PresenceDetector
+/**
+ * CLASS PresenceDetector
+ */
 class PresenceDetector extends IPSModule
 {
     use DebugHelper;
@@ -58,7 +60,7 @@ class PresenceDetector extends IPSModule
         // Settings
         $this->RegisterPropertyBoolean('ThresholdVariable', false);
         // Profiles
-        $association = [
+        $profile = [
             [0, 'Always', '', 0xFFFF00],
             [5, '5 lx', '', 0xFFFF00],
             [10, '10 lx', '', 0xFFFF00],
@@ -77,7 +79,7 @@ class PresenceDetector extends IPSModule
             [250, '250 lx', '', 0xFFFF00],
             [500, '500 lx', '', 0xFFFF00],
         ];
-        $this->RegisterProfile(vtInteger, 'TPD.Threshold', 'Light', '', '', 0, 0, 0, 0, $association);
+        $this->RegisterProfileInteger('TPD.Threshold', 'Light', '', '', 0, 0, 0, $profile);
         // Attribute
         $this->RegisterAttributeInteger('Trigger', 0);
         // Timer
@@ -231,7 +233,7 @@ class PresenceDetector extends IPSModule
 
         // Threshold
         $threshold = $this->ReadPropertyBoolean('ThresholdVariable');
-        $this->MaintainVariable('BrightnessThreshold', $this->Translate('Brightness threshold'), vtInteger, 'TPD.Threshold', 2, $threshold);
+        $this->MaintainVariable('BrightnessThreshold', $this->Translate('Brightness threshold'), VARIABLETYPE_INTEGER, 'TPD.Threshold', 2, $threshold);
         if ($threshold) {
             $this->EnableAction('BrightnessThreshold');
         }
@@ -239,11 +241,12 @@ class PresenceDetector extends IPSModule
     }
 
     /**
-     * MessageSink
-     * data[0] = new Value
-     * data[1] = value changed?
-     * data[2] = old value
-     * data[3] = timestamp.
+     * MessageSink - internal SDK funktion.
+     *
+     * @param mixed $timeStamp Message timeStamp
+     * @param mixed $senderID Sender ID
+     * @param mixed $message Message type
+     * @param mixed $data data[0] = new value, data[1] = value changed, data[2] = old value, data[3] = timestamp
      */
     public function MessageSink($timestamp, $sender, $message, $data)
     {
@@ -302,18 +305,23 @@ class PresenceDetector extends IPSModule
      */
     private function ProcessData($sender = 0, $id1 = -1, $id2 = -1)
     {
+        $this->SendDebug(__FUNCTION__, 'Sender: ' . $sender . ', Sensoren = [ ' . $id1 . ', ' . $id2 . ']');
         // first step is to check logical link
         if (!$this->CheckLink($sender, $id1, $id2)) {
+            $this->SendDebug(__FUNCTION__, 'CheckLink false!');
             return;
         }
         // next step is to check weekly schedule
         if (!$this->CheckSchedule()) {
+            $this->SendDebug(__FUNCTION__, 'CheckSchedule false!');
             return;
         }
         // next step is to check brightness
         if (!$this->CheckBrightness()) {
+            $this->SendDebug(__FUNCTION__, 'CheckBrightness false!');
             return;
         }
+        $this->SendDebug(__FUNCTION__, 'GO SwitchDevices!');
         // next step is to switch devices
         $this->SwitchDevices();
         // last step is the script execution

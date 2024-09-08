@@ -1,12 +1,12 @@
 {
     "id": "{AF444ACB-60B1-ABF0-C67D-EE4005079A32}",
-    "name": "Toolmatic Presence Detector",
+    "name": "Presence Detector",
     "author": "Wilkware (@Pitti)",
     "url": "https://wilkware.de",
     "compatibility": {
-        "version": "6.0"
+        "version": "6.4"
     },
-    "version": "3.1",
-    "build": 20220909,
-    "date": 1662717600
+    "version": "4.0",
+    "build": 20240908,
+    "date": 1725796800
 }

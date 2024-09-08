@@ -1,10 +1,10 @@
 # Präsenzmelder (Presence Detector)
 
-[![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-[![Product](https://img.shields.io/badge/Symcon%20Version-6.0-blue.svg)](https://www.symcon.de/produkt/)
-[![Version](https://img.shields.io/badge/Modul%20Version-3.1.20220909-orange.svg)](https://github.com/Wilkware/IPSymconPresenceDetector)
-[![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Actions](https://github.com/Wilkware/IPSymconPresenceDetector/workflows/Check%20Style/badge.svg)](https://github.com/Wilkware/IPSymconPresenceDetector/actions)
+[![Version](https://img.shields.io/badge/Symcon-PHP--Modul-red.svg?style=flat-square)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
+[![Product](https://img.shields.io/badge/Symcon%20Version-6.4-blue.svg?style=flat-square)](https://www.symcon.de/produkt/)
+[![Version](https://img.shields.io/badge/Modul%20Version-4.0.20240908-orange.svg?style=flat-square)](https://github.com/Wilkware/PresenceDetector)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Actions](https://img.shields.io/github/actions/workflow/status/wilkware/PresenceDetector/style.yml?branch=main&label=CheckStyle&style=flat-square)](https://github.com/Wilkware/PresenceDetector/actions)
 
 Das Modul Präsenzmelder (Presence Detector) schaltet in Abhängigkeit von Bewegung(en) und Helligkeit ein oder mehrere Geräte ein bzw. führt ein Skript aus. Die Bewegungsdaten können dabei logisch verknüpft werden. Zusätzlich kann ein Schwellwert für die Helligkeit hinterlegt werden.  
 
@@ -15,7 +15,7 @@ Das Modul Präsenzmelder (Presence Detector) schaltet in Abhängigkeit von Beweg
 3. [Installation](#user-content-3-installation)
 4. [Einrichten der Instanzen in IP-Symcon](#user-content-4-einrichten-der-instanzen-in-ip-symcon)
 5. [Statusvariablen und Profile](#user-content-5-statusvariablen-und-profile)
-6. [WebFront](#user-content-6-webfront)
+6. [Visualisierung](#user-content-6-visualisierung)
 7. [PHP-Befehlsreferenz](#user-content-7-php-befehlsreferenz)
 8. [Versionshistorie](#user-content-8-versionshistorie)
 
@@ -30,13 +30,13 @@ Das Modul Präsenzmelder (Presence Detector) schaltet in Abhängigkeit von Beweg
 
 ### 2. Voraussetzungen
 
-* IP-Symcon ab Version 6.0
+* IP-Symcon ab Version 6.4
 
 ### 3. Installation
 
 * Über den Modul Store das Modul _Präsenzmelder_ installieren.
 * Alternativ Über das Modul-Control folgende URL hinzufügen.  
-`https://github.com/Wilkware/IPSymconPresenceDetector` oder `git://github.com/Wilkware/IPSymconPresenceDetector.git`
+`https://github.com/Wilkware/PresenceDetector` oder `git://github.com/Wilkware/PresenceDetector.git`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
@@ -99,15 +99,24 @@ Name                   | Typ       | Beschreibung
 ---------------------- | --------- | ----------------
 TPD.Threshold          | Integer   | Werte: Immer, 5, 10, 15, 20, 25, 30, 40, 45, 50, 75, 100, 150, 200, 250 und 500 Lux
 
-### 6. WebFront
+### 6. Visualisierung
 
-Die erzeugten Variablen können direkt ins Webfront verlinkt werden.  
+Die erzeugten Variablen können direkt in die Visualisierung verlinkt werden.  
 
 ### 7. PHP-Befehlsreferenz
 
 Ein direkter Aufruf von öffentlichen Funktionen ist nicht notwendig!
 
 ### 8. Versionshistorie
+
+v4.0.20240908
+
+* _NEU_: Kompatibilität auf IPS 6.4 hoch gesetzt
+* _FIX_: Bibliotheks- bzw. Modulinfos vereinheitlicht
+* _FIX_: Namensnennung und Repo vereinheitlicht
+* _FIX_: Update Style-Checks
+* _FIX_: Übersetzungen überarbeitet und verbessert
+* _FIX_: Dokumentation vereinheitlicht 
 
 v3.1.20220909
 

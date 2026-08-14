@@ -72,22 +72,22 @@ class PresenceDetector extends IPSModuleStrict
      * @var array<string,mixed> Presentation (type)
      */
     private const TPD_PRESENTATION_THREADHOLD = [
-        'USAGE_TYPE' => 2,
+        'USAGE_TYPE'          => 2,
         'THOUSANDS_SEPARATOR' => '',
-        'DECIMAL_SEPARATOR' => 'Client',
-        'PERCENTAGE' => false,
-        'DIGITS' => 0,
-        'INTERVALS' => '[]',
-        'ICON' => 'brightness-low',
-        'INTERVALS_ACTIVE' => false,
-        'MAX' => 500,
-        'GRADIENT_TYPE' => 0,
-        'MIN' => 0,
-        'CUSTOM_GRADIENT' => '[]',
-        'PREFIX' => '',
-        'PRESENTATION' => VARIABLE_PRESENTATION_SLIDER,
-        'STEP_SIZE' => 0.0,
-        'SUFFIX' => ' lx',
+        'DECIMAL_SEPARATOR'   => 'Client',
+        'PERCENTAGE'          => false,
+        'DIGITS'              => 0,
+        'INTERVALS'           => '[]',
+        'ICON'                => 'brightness-low',
+        'INTERVALS_ACTIVE'    => false,
+        'MAX'                 => 500,
+        'GRADIENT_TYPE'       => 0,
+        'MIN'                 => 0,
+        'CUSTOM_GRADIENT'     => '[]',
+        'PREFIX'              => '',
+        'PRESENTATION'        => VARIABLE_PRESENTATION_SLIDER,
+        'STEP_SIZE'           => 0.0,
+        'SUFFIX'              => ' lx',
     ];
 
     // -------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 [![Product](https://img.shields.io/badge/Symcon%20Version-6.4-blue.svg?style=flat-square)](https://www.symcon.de/produkt/)
 [![Version](https://img.shields.io/badge/Modul%20Version-4.0.20240908-orange.svg?style=flat-square)](https://github.com/Wilkware/PresenceDetector)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Actions](https://img.shields.io/github/actions/workflow/status/wilkware/PresenceDetector/style.yml?branch=main&label=CheckStyle&style=flat-square)](https://github.com/Wilkware/PresenceDetector/actions)
+[![Actions](https://img.shields.io/github/actions/workflow/status/wilkware/PresenceDetector/ci.yml?branch=main&label=CI&style=flat-square)](https://github.com/Wilkware/PresenceDetector/actions)
 
 Das Modul Präsenzmelder (Presence Detector) schaltet in Abhängigkeit von Bewegung(en) und Helligkeit ein oder mehrere Geräte ein bzw. führt ein Skript aus. Die Bewegungsdaten können dabei logisch verknüpft werden. Zusätzlich kann ein Schwellwert für die Helligkeit hinterlegt werden.  
 
